@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorry to Avril</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: url('https://images.unsplash.com/photo-1503437313881-503a91226402?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+        background-size: cover;
+        color: #f7e9ae;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+        position: relative;
+        overflow: auto;
+      }
+      .fog-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 0;
+      }
+      h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 5px #000;
+        z-index: 1;
+      }
+      .intro {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeIn 2s ease-in-out;
+        z-index: 1;
+      }
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 600px;
+        z-index: 1;
+      }
+      .option {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      .option:hover {
+        transform: scale(1.03);
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 2rem;
+        color: #fff;
+        max-width: 600px;
+        margin-top: 2rem;
+        z-index: 1;
+      }
+      button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+      }
+      button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Rain effect */
+      .rain {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url('https://wallpapers.com/images/hd/rainy-day-pictures-vfkgu8zqtcw0n03h.jpg');
+        background-size: cover;
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fog-overlay"></div>
+    <div class="rain"></div>
+
+    <h1>Sorry to Avril</h1>
+    <div class="intro">I just want to say I'm sorry through this page.</div>
+    <div class="options" id="home">
+      <div class="option" onclick="showProblem(0)">看待“分享”</div>
+      <div class="option" onclick="showProblem(1)">论“情绪价值”</div>
+      <div class="option" onclick="showProblem(2)">表达爱意</div>
+      <div class="option" onclick="showProblem(3)">界限</div>
+      <div class="option" onclick="showProblem(4)">未来 – 异地恋</div>
+    </div>
+
+    <div class="card" id="problemCard" style="display: none">
+      <h2 id="problemTitle"></h2>
+      <p id="problemDesc"></p>
+      <button onclick="showSolution()">阿泓的解决办法</button>
+      <div id="solution" style="margin-top: 1rem; display: none"></div>
+      <button onclick="goHome()">回到首页</button>
+    </div>
+
+    <script>
+      const problems = [
+        {
+          title: "看待“分享”",
+          description: "问题：其实在以前对我来说，我都觉得我们的聊天都只是想要知道对方欸今天都做了什么或者遇到了什么事情，等等，因为我的想法是那种我每天有任务然后要完成balabala ，就是我们看待这个分享的不同，但是这几天想了过后发现其实不是，你更多需要的不是这种形式上的“报备“，更多的是可以聊心事，又或是真正在聊天中感受到被爱，真正feel到我们在互相关心的感觉到达。",
+          solution: "解决方法：分享平常遇到的事情归分享，不是分享好就是完成任务料，我会更多的聆听！你讲的东西 然后去想怎么和你一起消化你负面的情绪，又或是难受的地方！当然我也会学习分享我的“心事“（虽然我好像不是很会讲，but我会学！！）",
+        },
+        {
+          title: "论“情绪价值”",
+          description: "问题：其实在每一次的吵架，我觉得难免都会讲到这个问题，甚至是说每一次其实我也想一笑而过，因为在我心里，我已经给自己一个setting就是我是直男，所以我不会这样的东西，就导致我每一次都不打算去改变，但是在这两天我“努力”的去研究了情绪价值这个话题，其实发现我好像每次觉得他很难，很难就变得很讨厌，但其实你要的也许很简单，因为在我一贯来的生活方式里面，当有人告诉我他的烦恼或是问题，我都习惯直接用我的方式给他解决方法，因为我一直认为给他解决方法是最好的“安慰方式”，但是在我努力研究以后发现，也许提供解决方式有他的重要，但是每次当你遇到问题的那个当下，其实不一定要解决方法，或者其实你自己有解决方法，但是你要的是我的理解？或者是情绪上的回应吗？（我感觉la 不是的话我又要继续研究了）",
+          solution: "解决方法：收起我的理性分析 / 说教 / 成为guru的想法，在每一次的这种情况都会询问需要聊聊ma？还是希望我帮你出主意？虽然是很笨的方法！但是能够让我知道你现在需要我理解你，更贴近你的情绪世界里面，可能你的烦恼更容易被解决，而不是一味的提供解决方法，可能会让你更becek",
+        },
+        {
+          title: "表达爱意",
+          description: "问题：嗯！这个是我需要直面的问题！就是每次可能我接受到别人对我好的时候，甚至是称赞，我都会erm怎样讲就是那种讲没有没有的pattern，但是可能给予的人就会觉得很奇怪！或者说就是我不懂怎样接受别人对我的好之类的，我那个当下会觉得我不懂做什么啊啊啊！然后就到你嗯身为我的女朋友的时候，你对我又是加倍的好，虽然我真的是很爽很开心，但是可能我就忘记去表达感谢ah，或者说只是电话里面讲谢谢那样，可能没有feel！也会让你觉得我好像一点都不珍惜你对我的好！但是不是！我在我妈妈前面就是夸你夸到上天去，太骄傲了的那种！",
+          solution: "解决方法：所以以后时不时都需要用行动 / 不同的方式来表达爱意！ 在你对我好的时候，要有表示，而不是觉得是理所应当的！！时不时都需要发下story来记录记录我们生活的美好！这样也可以提醒我！我们still 幸福 & 都在爱着对方！",
+        },
+        {
+          title: "界限",
+          description: "问题：这个真的是要说千万个对不起都弥补不会所造成的伤害！其实在F4的“那段时间”我就有一直在提醒自己不要越界不要越界！！因为那时怕翻起你的旧伤疤！但是久了以后我可能就产生了那种放纵的心理又或是嗯用下半身思考，就导致可能我会一直想要“挑战”那个界限，的确这个东西会让人上瘾，就变得我可能在你每一次的勉强下，会让我更放纵！但是我偏偏却忘记，你是因为害怕拒绝，又或者说可能怕有不好的结果这样，然后就每次拉低自己的底线！这个我真的要说对不起！！就像你讲的那句话真的给我一个很大的提醒“真正的爱是心疼 是你不愿意 我就不会让你为难”我必须把这句话记在心里！",
+          solution: "解决方法：可能在往后的一段时间里，我会避免有独处的机会，更是要让我们重新培养起彼此间的信任，以及对对方产生安全感！当然这个东西我一定会一直告诫我自己，which我会要求我自己如果再有这样的越界行为，你可以直接分手！所以我觉得可能给我自己的提醒就是回到青春无悔那时候我们所立下的界限ba 这样在这段感情里面也许我们的关系会有更好的转变",
+        },
+        {
+          title: "未来 – 异地恋",
+          description: "其实这个是我一直都在思考的问题，我一直在想到底异地恋的解法是什么，我有几个比较大的朋友异地成功的好像只有2，3个，所以我一直都在观察他们的解决方法在哪里，但是我好像就是没有一个明确的答案，也不知道到底应该要怎样才能够维系好那个感情，虽然我深深相信经过异地恋磨练过的感情，不管遇到什么困难我都觉得是小问题了，所以每次你提起的时候，我都不敢说什么，因为我怕我做不到，又或是我开的只是空头支票！但是！！！！在这几天我想的时候，我觉得我好像太负面，又或是我好像根本不信任这几年来我们的感情基础！常常我都在讲关关难过关关过！为什么每次到谈到未来感情面向的时候却又打算逃避！！啊啊啊啊以前我都在erm打算蒙混过关，走一步看一步，但是却没有想到这个给你的压力也许很大，因为你看不到我们的未来，那你可能会选择干脆早点结束！因此我就想说的是！我觉得异地恋有解法了！",
+          solution: "解决方法：在我这几天研究以来！嗯我真的很认真看了很多video，which最重要的是要让对方有信任以及安全感！（虽然好像是我现在最缺乏给予你的）所以我觉得我需要学习的是不管是现在又或是以后如何在异地的 要给到对方安全感（但是我感觉这样嘴巴讲讲好像蛮废的）但是因为我现在根本不懂到底异地会是怎样的情况，所以我觉得我讲的话好像没有什么说服力，但是我会保证的是！不管怎样！我们在每一天一定会留时间和对方聊天！！！！ 绝对不可以没有！！！！！ 这是我现在能给予你的保证！ 至于以后！我相信我可以做得更好，也会继续学习！如何在异地恋里面去克服遇到的困难！ 但是最重要的我必须洁身自好 跟那些女人which 就是你梦里出现过的sophia sharon等 远离他们又或是保持距离 这样你才能对我有足够的信任！",
+        },
+      ];
+
+      function showProblem(index) {
+        document.getElementById("home").style.display = "none";
+        document.getElementById("problemCard").style.display = "block";
+        document.getElementById("problemTitle").innerText = problems[index].title;
+        document.getElementById("problemDesc").innerText = problems[index].description;
+        document.getElementById("solution").style.display = "none";
+        document.getElementById("solution").innerText = problems[index].solution;
+      }
+
+      function showSolution() {
+        document.getElementById("solution").style.display = "block";
+      }
+
+      function goHome() {
+        document.getElementById("home").style.display = "flex";
+        document.getElementById("problemCard").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
